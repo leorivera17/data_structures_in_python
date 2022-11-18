@@ -1,0 +1,57 @@
+import unittest
+from sorts import *
+
+
+class TestLab4(unittest.TestCase):
+
+    def test_simple(self):
+        nums = [23, 10]
+        comps = selection_sort(nums)
+        self.assertEqual(comps, 1)
+        self.assertEqual(nums, [10, 23])
+
+    def test_simple2(self):
+        nums = [0]
+        comps = selection_sort(nums)
+        self.assertEqual(comps, 0)
+        self.assertEqual(nums, [0])
+
+    def test_simple3(self):
+        nums = []
+        comps = selection_sort(nums)
+        self.assertEqual(comps, 0)
+        self.assertEqual(nums, [])
+
+    def test_simple9(self):
+        nums = [1, 2, 356, 123, 7653, 7, 9]
+        comps = selection_sort(nums)
+        self.assertEqual(comps, 21)
+        self.assertEqual(nums, [1, 2, 7, 9, 123, 356, 7653])
+
+    def test_simple4(self):
+        nums = [23, 10]
+        comps = insertion_sort(nums)
+        self.assertEqual(comps, 1)
+        self.assertEqual(nums, [10, 23])
+
+    def test_simple5(self):
+        nums = [0]
+        comps = insertion_sort(nums)
+        self.assertEqual(comps, 0)
+        self.assertEqual(nums, [0])
+
+    def test_simple6(self):
+        nums = []
+        comps = insertion_sort(nums)
+        self.assertEqual(comps, 0)
+        self.assertEqual(nums, [])
+
+    def test_simple12(self):
+        nums = [1, 2, 356, 123, 7653, 7, 9]
+        comps = insertion_sort(nums)
+        self.assertEqual(comps, 7)
+        self.assertEqual(nums, [1, 2, 7, 9, 123, 356, 7653])
+
+
+if __name__ == '__main__':
+    unittest.main()
