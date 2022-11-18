@@ -1,0 +1,77 @@
+# Leo Rivera
+# Lab 2
+
+class Node:
+    def __init__(self, initdata):
+        self.data = initdata
+        self.next = None
+
+
+class Stack:
+    # last in first out data type
+    def __init__(self, capacity):
+        # this initializes everything
+        self.capacity = capacity
+        self.head = None
+        self.num_items = 0
+
+    def is_empty(self):
+        # returns true if stack is empty and vise versa
+        return self.head is None
+
+    def is_full(self):
+        # return ture if the stack is full or vise versa
+        """Returns true if the stack self is full and false otherwise"""
+        return self.num_items == self.capacity
+
+    def push(self, item):
+        # if stack is not full it pushes the item on the stack,
+        # if the stack is full then it will raise an error
+        if self.num_items == self.capacity:
+            raise IndexError
+        temp = Node(item)
+        temp.next = self.head
+        self.head = temp
+        self.num_items += 1
+
+    def pop(self):
+        # this is the opposite of a push, push items out the stack
+        if self.is_empty():
+            raise IndexError
+        temp = self.head.data
+        self.head = self.head.next
+        self.num_items -= 1
+        return temp
+
+    def peek(self):
+        # peek sounds exactly how it sounds
+        # looks what is on the top of the stack
+        if self.is_empty():
+            raise IndexError
+        return self.head.data
+
+    def size(self):
+        # will return a number of the size of the stack
+        return self.num_items
+
+    # def size1(self):
+    #     # this is another way of finding the size
+    #     return self.size_helper(self.head)
+    #
+    # def size_helper(self, node):
+    #     if node is None:
+    #         return 0
+    #     return 1 + self.size_helper(node.next)
+    #
+    # def size_helper2(self, node, size=0):
+    #     if node is None:
+    #         return size
+    #     return self.size_helper2(node.next, size + 1)
+
+
+nodes = Node(100)
+print(n)
+nd = Node(69)
+print(nd)
+node = nd
+print(nodes)
