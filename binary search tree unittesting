@@ -1,0 +1,50 @@
+import unittest
+from binary_search_tree import *
+
+
+class TestLab5(unittest.TestCase):
+
+    def test_simple1(self):
+        bst = BinarySearchTree()
+        self.assertTrue(bst.is_empty())
+        bst.insert(10, 'stuff')
+        self.assertTrue(bst.search(10))
+        self.assertEqual(bst.find_min(), (10, 'stuff'))
+        bst.insert(10, 'other')
+        self.assertEqual(bst.find_max(), (10, 'other'))
+        self.assertEqual(bst.tree_height(), 0)
+        self.assertEqual(bst.inorder_list(), [10])
+        self.assertEqual(bst.preorder_list(), [10])
+        self.assertEqual(bst.level_order_list(), [10])
+
+    def test_simple2(self):
+        bst = BinarySearchTree()
+        self.assertFalse(bst.search(10))
+        self.assertEqual(bst.find_min(), None)
+        self.assertEqual(bst.find_max(), None)
+        self.assertEqual(bst.tree_height(), None)
+        bst.insert(25)
+        bst.insert(15)
+        self.assertTrue(bst.search(15))
+        bst.insert(30)
+        bst.insert(13)
+        self.assertEqual(bst.find_min(), (13, None))
+
+    def test_simple3(self):
+        bst = BinarySearchTree()
+        self.assertEqual(bst.search(10), False)
+        self.assertEqual(bst.inorder_list(), [])
+        self.assertEqual(bst.preorder_list(), [])
+        bst.insert(25)
+        bst.insert(15)
+        bst.insert(30)
+        bst.insert(13)
+        self.assertEqual(bst.level_order_list(), [25, 15, 30, 13])
+        bst.insert(27)
+        self.assertEqual(bst.find_max(), (30, None))
+        self.assertEqual(bst.search(26), False)
+        self.assertEqual(bst.search(29), False)
+
+
+if __name__ == '__main__':
+    unittest.main()
