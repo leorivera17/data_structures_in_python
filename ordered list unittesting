@@ -1,56 +1,40 @@
 import unittest
-from sorts import *
+from ordered_list import *
 
 
 class TestLab4(unittest.TestCase):
 
-    def test_simple(self):
-        nums = [23, 10]
-        comps = selection_sort(nums)
-        self.assertEqual(comps, 1)
-        self.assertEqual(nums, [10, 23])
+    def test_sample_first(self):
+        t_list = OrderedList()
+        t_list.add(11)
+        t_list.add(4)
+        t_list.add(77)
+        t_list.add(22)
+        t_list.add(3)
+        self.assertEqual(t_list.python_list(), [3, 4, 11, 22, 77])
+        self.assertEqual(t_list.size(), 5)
+        self.assertEqual(t_list.index(4), 1)
+        self.assertTrue(t_list.search(4))
+        self.assertFalse(t_list.is_empty())
+        self.assertEqual(t_list.python_list_reversed(), [77, 22, 11, 4, 3])
+        self.assertTrue(t_list.remove(3))
+        t_list.add(3)
+        self.assertEqual(t_list.pop(0), 3)
+        self.assertEqual(t_list.python_list(), [4, 11, 22, 77])
 
-    def test_simple2(self):
-        nums = [0]
-        comps = selection_sort(nums)
-        self.assertEqual(comps, 0)
-        self.assertEqual(nums, [0])
-
-    def test_simple3(self):
-        nums = []
-        comps = selection_sort(nums)
-        self.assertEqual(comps, 0)
-        self.assertEqual(nums, [])
-
-    def test_simple9(self):
-        nums = [1, 2, 356, 123, 7653, 7, 9]
-        comps = selection_sort(nums)
-        self.assertEqual(comps, 21)
-        self.assertEqual(nums, [1, 2, 7, 9, 123, 356, 7653])
-
-    def test_simple4(self):
-        nums = [23, 10]
-        comps = insertion_sort(nums)
-        self.assertEqual(comps, 1)
-        self.assertEqual(nums, [10, 23])
-
-    def test_simple5(self):
-        nums = [0]
-        comps = insertion_sort(nums)
-        self.assertEqual(comps, 0)
-        self.assertEqual(nums, [0])
-
-    def test_simple6(self):
-        nums = []
-        comps = insertion_sort(nums)
-        self.assertEqual(comps, 0)
-        self.assertEqual(nums, [])
-
-    def test_simple12(self):
-        nums = [1, 2, 356, 123, 7653, 7, 9]
-        comps = insertion_sort(nums)
-        self.assertEqual(comps, 7)
-        self.assertEqual(nums, [1, 2, 7, 9, 123, 356, 7653])
+    def test_sample_second(self):
+        t_list = OrderedList()
+        t_list.add(11)
+        self.assertEqual(t_list.add(11), False)
+        t_list.remove(11)
+        self.assertEqual(t_list.remove(11), False)
+        self.assertEqual(t_list.index(1), None)
+        with self.assertRaises(IndexError):
+            t_list.pop(1)
+        t_list.add(11)
+        t_list.add(12)
+        self.assertEqual(t_list.pop(1), 12)
+        self.assertFalse(t_list.search(0))
 
 
 if __name__ == '__main__':
