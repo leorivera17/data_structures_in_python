@@ -1,0 +1,33 @@
+import unittest
+from queue_array import Queue
+from queue_linked import Queue
+
+
+class TestLab1(unittest.TestCase):
+    def test_queues(self):
+        '''Trivial test to ensure method names and parameters are correct'''
+        q = Queue(5)
+        self.assertEqual(q.is_empty(), True)
+        self.assertEqual(q.is_full(), False)
+        q.enqueue('thing')
+        self.assertEqual(q.dequeue(), 'thing')
+        self.assertEqual(q.size(), 0)
+
+    def test_queue1(self):
+        q = Queue(5)
+        with self.assertRaises(IndexError):
+            q.dequeue()
+
+    def test_queue2(self):
+        q = Queue(5)
+        q.enqueue(1)
+        q.enqueue(2)
+        q.enqueue(3)
+        q.enqueue(4)
+        q.enqueue(5)
+        with self.assertRaises(IndexError):
+            q.enqueue(6)
+
+
+if __name__ == '__main__':
+    unittest.main()
