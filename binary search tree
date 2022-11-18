@@ -1,0 +1,152 @@
+from queue_array import Queue
+
+
+class TreeNode:
+    def __init__(self, key, data, left=None, right=None):
+        self.key = key
+        self.data = data
+        self.left = left
+        self.right = right
+
+
+class BinarySearchTree:
+
+    def __init__(self):
+        # Returns empty BST
+        self.root = None
+
+    def is_empty(self):
+        # returns True if tree is empty, else False
+        return self.root is None
+
+    def search(self, key):
+        # returns True if key is in a node of the tree, else False
+        # This method MUST BE RECURSIVE. Hint: add a recursive helper method
+        return self.help_search(self.root, key)
+
+    def help_search(self, node, key):
+        if self.is_empty():
+            return False
+        elif key == node.key:
+            return True
+        elif key < node.key:
+            if node.left is not None:
+                return self.help_search(node.left, key)
+            else:
+                return False
+        elif key > node.key:
+            if node.right is not None:
+                return self.help_search(node.right, key)
+            else:
+                return False
+
+    def insert(self, key, data=None):
+        # inserts new node w/ key and data
+        # If an item with the given key is already in the BST, 
+        # the data in the tree will be replaced with the new data
+        # This method MUST BE RECURSIVE. Hint: add a recursive helper method
+        return self.help_insert(self.root, TreeNode(key, data))
+
+    def help_insert(self, node, new):
+        if self.is_empty():
+            self.root = new
+        elif node.key == new.key:
+            node.data = new.data
+        elif node.key > new.key:
+            if node.left is None:
+                node.left = new
+            else:
+                return self.help_insert(node.left, new)
+        elif node.key < new.key:
+            if node.right is None:
+                node.right = new
+            else:
+                return self.help_insert(node.right, new)
+
+    def find_min(self):
+        # returns a tuple with min key and data in the BST
+        # returns None if the tree is empty
+        # This method MUST BE RECURSIVE. Hint: add a recursive helper method
+        if self.is_empty():
+            return None
+        return self.helper_find_min(self.root)
+
+    def helper_find_min(self, node):
+        if node.left is None:
+            return (node.key, node.data)
+        return self.helper_find_min(node.left)
+
+    def find_max(self):
+        # returns a tuple with max key and data in the BST
+        # returns None if the tree is empty
+        # This method MUST BE RECURSIVE. Hint: add a recursive helper method
+        if self.is_empty():
+            return None
+        return self.helper_find_max(self.root)
+
+    def helper_find_max(self, node):
+        if node.right is None:
+            return (node.key, node.data)
+        return self.helper_find_max(node.right)
+
+    def tree_height(self):
+        # return the height of the tree
+        # returns None if tree is empty
+        # This method MUST BE RECURSIVE. Hint: add a recursive helper method
+        if self.is_empty():
+            return None
+        return self.help_tree_height(self.root)
+
+    def help_tree_height(self, node):
+        if node is None:
+            return -1
+        return 1 + max(self.help_tree_height(node.left), self.help_tree_height(node.right))
+
+    def inorder_list(self):
+        # return Python list of BST keys representing in-order traversal of BST
+        # DON'T use a default list parameter
+        # This method MUST BE RECURSIVE. Hint: add a recursive helper method
+        return self.help_inorder_list(self.root)
+
+    def help_inorder_list(self, node):
+        lists = []
+        if self.is_empty():
+            return []
+        if node is not None:
+            lists = self.help_inorder_list(node.left)
+            lists.append(node.key)
+            lists += self.help_inorder_list(node.right)
+        return lists
+
+    def preorder_list(self):
+        # return Python list of BST keys representing pre-order traversal of BST
+        # DON'T use a default list parameter
+        # This method MUST BE RECURSIVE. Hint: add a recursive helper method
+        return self.help_preorder_list(self.root)
+
+    def help_preorder_list(self, node):
+        lists = []
+        if self.is_empty():
+            return []
+        if node is not None:
+            lists.append(node.key)
+            lists += self.help_preorder_list(node.left)
+            lists += self.help_preorder_list(node.right)
+        return lists
+
+    def level_order_list(self):
+        # return Python list of BST keys representing level-order traversal of BST
+        # You MUST use your queue_array data structure from lab 3 to implement this method
+        # DON'T attempt to use recursion
+        q = Queue(25000)  # Don't change this!
+        list = []
+        q.enqueue(self.root)
+        while not q.is_empty():
+            current = q.dequeue()
+            list.append(current.key)
+            if current.left is not None:
+                q.enqueue(current.left)
+            if current.right is not None:
+                q.enqueue(current.right)
+        return list
+
