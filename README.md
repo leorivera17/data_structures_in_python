@@ -1,1 +1,1 @@
-this is my progress in understanding python using pycharm. thank you for your time.
+This is my progress in understanding python. Thank you for your time.
