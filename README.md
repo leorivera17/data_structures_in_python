@@ -1,1 +1,1 @@
-This is my progress in understanding python. Thank you for your time.
+Please take your time :)
